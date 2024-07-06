@@ -10,7 +10,7 @@ game = {
     "guess_word": "_ " * len(secret_word),
     "nb_life": 10
 }
-print(secret_word)
+
 print(f"Lenght of the word : {len(game['secret_word'])}")
 print(f"{game['guess_word']} - Life : {game['nb_life']}")
 
