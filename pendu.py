@@ -7,7 +7,7 @@ secret_word = words_list[random_number]
 
 game = {
     "secret_word": secret_word,
-    "guess_word": "_ " * len(secret_word),
+    "guess_word": "." * len(secret_word),
     "nb_life": 10
 }
 
@@ -16,9 +16,22 @@ print(f"{game['guess_word']} - Life : {game['nb_life']}")
 
 
 print("Bienvenu dans le jeu du pendu")
-print("pour arrêter le jeu : soit vous gagnez soit vous écrivez 'stop'")
 
 while True:
-    mot = input(" ? > ")
-    if mot == "stop":
+    letter = input(" ? > ")
+    if letter in game["secret_word"] and letter not in game["guess_word"]:
+        guess_word_list = list(game["guess_word"])
+        for index, current_letter in enumerate(game["secret_word"]):
+            if current_letter == letter:    
+                guess_word_list[index] = current_letter
+        game["guess_word"] = "".join(guess_word_list)          
+    elif letter not in game["secret_word"]:
+        game["nb_life"] -= 1
+    print(f"{game['guess_word']} - Life : {game['nb_life']}")
+    
+    if "." not in game["guess_word"]:
+        print("You win!")
+        break
+    elif game["nb_life"] < 1:
+        print("You loose!")
         break
